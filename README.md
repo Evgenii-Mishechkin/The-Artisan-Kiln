@@ -1,60 +1,36 @@
-# Тестовое задание: Разработка интерактивной веб-формы заказа «The Artisan Kiln»
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Описание задачи
-Необходимо реализовать фронтенд-часть одностраничного приложения для заказа керамической плитки. Интерфейс должен быть отзывчивым и поддерживать два состояния:
-1.  **Mobile:** Вертикальный макет формы заказа - дизайн в файле [design_mobile.png](design/design_mobile.png).
-2.  **Desktop:** Расширенная версия с интерактивным инструментом визуализации дизайна - дизайн в файле [design_desktop.png](design/design_desktop.png).
+## Getting Started
 
-## Стек технологий
-* **Framework:** Next.js.
-* **Язык:** TypeScript.
-* **Стилизация:** Tailwind CSS.
-* **State Management:** Redux (рекомендуется Redux Toolkit).
+First, run the development server:
 
----
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Технические требования
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### 1. Верстка и Адаптив (HTML/CSS/Tailwind)
-* **Pixel Perfect:** Максимальное соответствие предоставленным макетам (шрифты, отступы, цветовая схема).
-* **Responsive Design:** Реализовать адаптивный переход между мобильной и десктопной версиями.
-* **Tailwind CSS:** Использование утилит Tailwind для всей стилизации. Кастомные настройки (цвета, шрифты) должны быть вынесены в `tailwind.config.js`.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### 2. Функциональность (React/TypeScript)
-* **Shopping Cart:**
-    * Изменение количества (Quantity) для каждой плитки.
-    * Удаление позиций из списка.
-    * Динамический расчет **Subtotal**, **Shipping** и **Grand Total**.
-* **Design Tool (только Desktop):**
-    * Интерактивная сетка 6x6.
-    * Логика «выбора и размещения» плиток из палитры (Design Palette) в сетку.
-* **Checkout Form:**
-    * Валидация полей (Email, номер карты, обязательные поля).
-    * Переключение методов оплаты (Credit Card, PayPal, Apple Pay, Bank Transfer).
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### 3. Управление состоянием (Redux)
-* Данные корзины и состояние сетки визуализатора должны храниться в глобальном хранилище (Store).
-* Инициализация приложения начальными данными из макета (Ocean Wave, Forest Fern, Terracotta Dot, Yellow Star).
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## Бизнес-логика расчетов
-* `Subtotal` = Сумма (Количество * Цена за ед.).
-* `Shipping`: Если `Subtotal > $500`, доставка — Бесплатно ($0.00), иначе — $25.00.
-* `Grand Total` = Subtotal + Shipping.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
----
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Будет плюсом
-* Использование анимаций (например, через `framer-motion`) при взаимодействии с корзиной или сеткой.
-* Написание Unit-тестов для логики расчетов.
-* Чистая архитектура компонентов и типизация всех сущностей.
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Формат сдачи
-1.  Ссылка на публичный репозиторий (GitHub/GitLab).
-2.  Ссылка на Demo (Vercel/Self-Hosted).
-3.  `README.md` в корне проекта с инструкцией по запуску (`npm install`, `npm run dev`).
-
-**Желаемый срок выполнения:** 3–5 рабочих дней.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

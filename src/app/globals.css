@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --kiln-bg: #f7f6e3;
+    --kiln-text: #080501;
+  }
+
+  body {
+    @apply bg-kiln-page font-sans text-kiln-ink antialiased;
+  }
+}

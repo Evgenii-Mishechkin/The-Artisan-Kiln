@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="72" viewBox="0 0 56 72" fill="none" aria-hidden="true">
+  <!-- Placeholder: temple / workshop (replace 1:1 from design) -->
+  <path d="M4 22L28 6L52 22V28H4V22Z" fill="#4a6741" stroke="#080501" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="10" y="28" width="6" height="28" fill="#f7f6e3" stroke="#080501" stroke-width="1.5"/>
+  <rect x="18" y="28" width="6" height="28" fill="#f7f6e3" stroke="#080501" stroke-width="1.5"/>
+  <rect x="26" y="28" width="6" height="28" fill="#f7f6e3" stroke="#080501" stroke-width="1.5"/>
+  <rect x="34" y="28" width="6" height="28" fill="#f7f6e3" stroke="#080501" stroke-width="1.5"/>
+  <rect x="6" y="54" width="44" height="14" fill="#c9a227" stroke="#080501" stroke-width="1.5"/>
+  <path d="M18 54V68H38V54C38 46 32 42 28 42C24 42 18 46 18 54Z" fill="#e6dec4" stroke="#080501" stroke-width="1.5"/>
+  <path d="M22 50H24M26 50H28M30 50H32M34 50H36" stroke="#080501" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
