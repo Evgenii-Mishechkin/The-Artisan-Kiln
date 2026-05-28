@@ -29,66 +29,65 @@ export function CartSection() {
   const lines = useAppSelector(selectCartLines);
 
   return (
-    <section className="w-fit max-w-full flex flex-col gap-4">
-      <div className="w-fit max-w-full">
-        <div className="overflow-hidden rounded-t-[5px] border-2 border-kiln-ink bg-kiln-paper shadow-inner-bracket">
-          <table className="w-[22.1rem] table-fixed border-collapse sm:w-[32.6rem]">
-            <colgroup>
-              <col className="w-[5.9rem]" />
-              <col className="w-[4.3rem]" />
-              <col className="w-[4.3rem]" />
-              <col className="w-[4.3rem]" />
-              <col className="w-[4.3rem]" />
-            </colgroup>
-            <thead>
-              <tr>
-                <th className={`${cartHead} ${cartColTight} border-l-0 border-t-0`}>
-                  Tile Collection
-                </th>
-                <th className={`${cartHead} border-t-0`}>Item</th>
-                <th className={`${cartHead} border-t-0`}>
-                  <HeadTwoLine top="Quantity" bottom="(sq. ft.)" />
-                </th>
-                <th className={`${cartHead} border-t-0`}>
-                  <HeadTwoLine top="Unit Price" bottom="($)" />
-                </th>
-                <th className={`${cartHead} ${cartColValue} border-r-0 border-t-0`}>
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="[&>tr:last-child>td]:border-b-0">
-              <AnimatePresence initial={false}>
-                {lines.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan={5}
-                      className={`${cartCell} border-b-0 border-l-0 border-r-0 py-8 text-sm text-kiln-navy/50`}
-                    >
-                      Your cart is empty. Add tiles to get started.
-                    </td>
-                  </tr>
-                ) : (
-                  lines.map((line) => <CartRow key={line.id} line={line} />)
-                )}
-              </AnimatePresence>
-            </tbody>
-          </table>
-        </div>
+    <section className="w-fit max-w-full">
+      <div className="overflow-hidden rounded-t-[5px] border-2 border-kiln-ink bg-kiln-paper shadow-inner-bracket">
+        <table className="w-[22.1rem] table-fixed border-collapse sm:w-[32.6rem]">
+          <colgroup>
+            <col className="w-[5.9rem]" />
+            <col className="w-[4.3rem]" />
+            <col className="w-[4.3rem]" />
+            <col className="w-[4.3rem]" />
+            <col className="w-[4.3rem]" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th className={`${cartHead} ${cartColTight} border-l-0 border-t-0`}>
+                Tile Collection
+              </th>
+              <th className={`${cartHead} border-t-0`}>Item</th>
+              <th className={`${cartHead} border-t-0`}>
+                <HeadTwoLine top="Quantity" bottom="(sq. ft.)" />
+              </th>
+              <th className={`${cartHead} border-t-0`}>
+                <HeadTwoLine top="Unit Price" bottom="($)" />
+              </th>
+              <th className={`${cartHead} ${cartColValue} border-r-0 border-t-0`}>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="[&>tr:last-child>td]:border-b-0">
+            <AnimatePresence initial={false}>
+              {lines.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className={`${cartCell} border-b-0 border-l-0 border-r-0 py-8 text-sm text-kiln-navy/50`}
+                  >
+                    Your cart is empty. Add tiles to get started.
+                  </td>
+                </tr>
+              ) : (
+                lines.map((line) => <CartRow key={line.id} line={line} />)
+              )}
+            </AnimatePresence>
+          </tbody>
+        </table>
+      </div>
 
-        <div className="grid sm:grid-cols-[auto_1fr] grid-flow-col justify-items-end sm:items-start">
-          <div className="pl-8 pt-4">
+      <div className="grid grid-flow-col justify-items-end sm:grid-cols-[auto_1fr] sm:items-start">
+        <div className="pl-8 pt-4">
           <Image
             src="/assets/decor/geo-tile-terra.svg"
             alt=""
             width={64}
             height={64}
-            className="h-16 w-16 -rotate-[18deg] sm:block rounded-[5px]"
+            className="h-16 w-16 -rotate-[18deg] rounded-[5px]"
             unoptimized
-          /></div>
-          <AddTileDropdown />
-          <OrderSummary variant="cart" className="sm:justify-self-end" />
+          />
         </div>
+        <AddTileDropdown />
+        <OrderSummary variant="cart" className="sm:justify-self-end" />
       </div>
     </section>
   );

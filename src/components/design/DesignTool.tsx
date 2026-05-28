@@ -40,7 +40,7 @@ function PaletteTile({ tileId }: { tileId: TileId }) {
       <TilePattern
         tileId={tileId}
         size={48}
-        className="!h-full !w-full !max-h-none !max-w-none rounded-none border-0 object-cover"
+        className="h-full w-full max-h-none max-w-none rounded-none border-0 object-cover"
       />
     </button>
   );
@@ -178,7 +178,7 @@ export function DesignTool() {
   };
 
   return (
-    <section className="hidden flex-col gap-4 lg:flex">
+    <section className="hidden lg:block">
       {paletteIds.length === 0 ? (
         <p className="rounded border border-dashed border-kiln-navy/30 p-6 text-center text-sm text-kiln-navy/50">
           Add tiles to your cart to unlock the design palette.

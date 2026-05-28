@@ -40,7 +40,7 @@ export function CartActionButton({
     <button
       type="button"
       onClick={onClick}
-      className="group flex min-w-[1.9rem] flex-col items-center gap-0.5 transition hover:opacity-90 sm:min-w-[2.9rem] sm:gap-0"
+      className="flex min-w-[1.9rem] flex-col items-center gap-0.5 transition hover:opacity-90 sm:min-w-[2.9rem] sm:gap-0"
       aria-label={ariaLabel}
     >
       <span
