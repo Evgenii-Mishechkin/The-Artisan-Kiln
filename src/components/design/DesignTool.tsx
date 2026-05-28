@@ -191,7 +191,7 @@ export function DesignTool() {
         >
           <div className="flex items-start">
             <div className="flex flex-1 flex-col">
-              <div className="text-center pb-10 pt-4 border-[2px] border-b-0 border-kiln-ink bg-kiln-cream">
+              <div className="rounded-tl-[5px] border-[2px] border-b-0 border-kiln-ink bg-kiln-cream pb-10 pt-4 text-center">
                 <h2 className="text-[1.2rem] font-bold uppercase tracking-widest text-kiln-navy">
                   Visualize Your Order
                 </h2>
@@ -200,7 +200,7 @@ export function DesignTool() {
                 </p>
               </div>
               <div
-                className="grid gap-0 border-2 border-solid border-kiln-ink"
+                className="grid gap-0 overflow-hidden rounded-bl-[5px] rounded-br-[5px] border-2 border-solid border-kiln-ink"
                 style={{
                   gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`,
                 }}
@@ -213,10 +213,10 @@ export function DesignTool() {
             </div>
 
             <aside className="w-[9.5rem] shrink-0">
-              <p className="bg-kiln-cream pb-2 text-center text-[1.5rem] font-bold uppercase text-kiln-navy border-[2px] border-l-0 border-kiln-ink">
+              <p className="rounded-tr-[5px] border-[2px] border-l-0 border-kiln-ink bg-kiln-cream pb-2 text-center text-[1.5rem] font-bold uppercase text-kiln-navy">
                 Design Palette
               </p>
-              <div className="grid grid-cols-2 gap-2 border-[2px] border-t-0 border-l-0 border-kiln-ink bg-kiln-cream p-2 max-h-[420px] overflow-y-auto">
+              <div className="grid max-h-[420px] grid-cols-2 gap-2 overflow-y-auto rounded-br-[5px] border-[2px] border-t-0 border-l-0 border-kiln-ink bg-kiln-cream p-2">
                 {paletteIds.map((id) => (
                   <PaletteTile key={id} tileId={id} />
                 ))}
