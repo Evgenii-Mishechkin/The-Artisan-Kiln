@@ -18,9 +18,7 @@ export function OrderPage() {
         <div className="mt-8 flex flex-col gap-8 lg:mt-10 lg:flex-row lg:items-start lg:gap-5 xl:gap-6">
           <div className="min-w-0 lg:flex-[75_1_0%]">
             <div className="flex flex-wrap items-start gap-8 lg:gap-5 xl:gap-6">
-              <div className="w-fit max-w-full flex-none space-y-5">
-                <CartSection />
-              </div>
+              <CartSection />
 
               <div className="min-w-0 flex-[45_1_30rem]">
                 <DesignTool />

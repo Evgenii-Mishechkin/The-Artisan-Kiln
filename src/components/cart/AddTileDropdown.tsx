@@ -30,7 +30,7 @@ export function AddTileDropdown() {
   };
 
   return (
-    <div ref={rootRef} className="relative w-fit">
+    <div ref={rootRef} className="relative w-fit pt-2">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -46,7 +46,8 @@ export function AddTileDropdown() {
           unoptimized
         />
         <span className="max-w-[8.5rem] whitespace-normal leading-none">
-          Add New Tile to Cart
+          Add New Tile <br />
+          to Cart
         </span>
         <Image
           src="/assets/icons/chevron-down.svg"
@@ -71,13 +72,13 @@ export function AddTileDropdown() {
                 <button
                   type="button"
                   onClick={() => pick(tile.id)}
-                  className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-kiln-cream"
+                  className="flex w-full items-center gap-3 px-2 py-3 text-left hover:bg-kiln-cream"
                 >
                   <Image
                     src={tile.patternSrc}
                     alt=""
-                    width={40}
-                    height={40}
+                    width={25}
+                    height={25}
                     className={`${cartRadius} border-2 border-solid border-kiln-ink/15`}
                     unoptimized
                   />

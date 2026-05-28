@@ -22,13 +22,13 @@ function BracketValue({
 }) {
   return (
     <span
-      className={`inline-flex items-center border-x-[2px] border-b-[2px] border-kiln-ink px-1.5 py-0.5 tabular-nums ${
+      className={`inline-flex w-[6.3rem] items-center justify-between border-x-[2px] border-b-[2px] border-kiln-ink px-1.5 py-0.5 tabular-nums ${
         strong ? "font-bold text-kiln-ink" : "font-bold text-kiln-navy"
       } ${strong ? "rounded-b-[5px] bg-kiln-cream" : "bg-kiln-paper"}`}
     >
-      <span className="mr-1 text-kiln-navy/70">[</span>
-      <span className="min-w-[4.4rem] text-right">{children}</span>
-      <span className="ml-1 text-kiln-navy/70">]</span>
+      <span className="text-kiln-navy/70">[</span>
+      <span className="text-right">{children}</span>
+      <span className="text-kiln-navy/70">]</span>
     </span>
   );
 }

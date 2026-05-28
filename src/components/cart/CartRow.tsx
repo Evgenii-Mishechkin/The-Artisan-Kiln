@@ -34,9 +34,9 @@ export function CartRow({ line }: CartRowProps) {
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: "auto" }}
       exit={{ opacity: 0, height: 0 }}
-      className="bg-kiln-paper"
+      className="bg-kiln-paper last:[&>td]:border-b-0"
     >
-      <td className={`${cartBodyCell} ${cartColTight}`}>
+      <td className={`${cartBodyCell} ${cartColTight} border-l-0`}>
         <div className="mx-auto flex h-full w-max max-w-[4.75rem] flex-col items-center justify-center gap-1">
           <TilePattern tileId={line.tileId} size={44} />
           <span className="whitespace-normal text-[11px] font-bold uppercase leading-tight text-kiln-navy">
@@ -44,7 +44,7 @@ export function CartRow({ line }: CartRowProps) {
           </span>
         </div>
       </td>
-      <td className={`${cartBodyCell} ${cartColItem} hidden sm:table-cell`}>
+      <td className={`${cartBodyCell} ${cartColItem}`}>
         <div className="flex h-full items-center justify-center">
           <TilePattern tileId={line.tileId} size={56} />
         </div>
@@ -70,7 +70,7 @@ export function CartRow({ line }: CartRowProps) {
           />
         </div>
       </td>
-      <td className={`${cartBodyCell} ${cartColTight}`}>
+      <td className={`${cartBodyCell} ${cartColValue} border-r-0`}>
         <div className="flex h-full items-center justify-center gap-1">
           <CartActionButton
             variant="add"

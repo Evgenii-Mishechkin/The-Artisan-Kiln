@@ -40,7 +40,7 @@ export function CartActionButton({
     <button
       type="button"
       onClick={onClick}
-      className="group flex min-w-[2.9rem] flex-col items-center gap-0.5 transition hover:opacity-90"
+      className="group flex min-w-[1.9rem] flex-col items-center gap-0.5 transition hover:opacity-90 sm:min-w-[2.9rem] sm:gap-0"
       aria-label={ariaLabel}
     >
       <span
@@ -49,7 +49,7 @@ export function CartActionButton({
       >
         <Image src={icon} alt="" width={20} height={20} className="h-5 w-5" />
       </span>
-      <span className="text-[11px] font-bold uppercase leading-none tracking-tight text-kiln-navy">
+      <span className="text-base font-bold uppercase leading-none tracking-tight text-kiln-navy">
         {label}
       </span>
     </button>
