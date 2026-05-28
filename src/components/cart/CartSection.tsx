@@ -1,15 +1,16 @@
 "use client";
 
 import { AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { selectCartLines } from "@/store/selectors";
 import { useAppSelector } from "@/store/hooks";
 import { AddTileDropdown } from "@/components/cart/AddTileDropdown";
+import { OrderSummary } from "@/components/cart/OrderSummary";
 import { CartRow } from "@/components/cart/CartRow";
 import {
   cartCell,
   cartColTight,
   cartHead,
-  cartRadius,
 } from "@/components/cart/cartTableLayout";
 
 function HeadTwoLine({ top, bottom }: { top: string; bottom: string }) {
@@ -31,9 +32,9 @@ export function CartSection() {
       <h2 className="inline-block self-start text-[2rem] font-black uppercase leading-none tracking-tight text-kiln-ink">
         Shopping Cart & Design Tool
       </h2>
-      <div className="w-[22.1rem] max-w-full sm:w-[32.6rem]">
-        <div className={`overflow-hidden ${cartRadius} bg-kiln-paper shadow-inner-bracket`}>
-          <table className="w-full table-fixed border-collapse">
+      <div className="w-fit max-w-full">
+        <div className="overflow-hidden rounded-t-[5px] bg-kiln-paper shadow-inner-bracket">
+          <table className="w-[22.1rem] table-fixed border-collapse sm:w-[32.6rem]">
             <colgroup>
               <col className="w-[6.3rem] sm:w-[8.9rem]" />
               <col className="hidden sm:table-column sm:w-[6.3rem]" />
@@ -77,8 +78,21 @@ export function CartSection() {
           </table>
         </div>
 
-        <div className="mt-4 w-full">
-          <AddTileDropdown />
+        <div className="grid sm:grid-cols-[auto_1fr] sm:items-start sm:gap-x-2">
+          <div className="flex items-start gap-[3.9rem]">
+            <Image
+              src="/assets/decor/geo-tile-terra.svg"
+              alt=""
+              width={64}
+              height={64}
+              className="mt-[10px] hidden h-16 w-16 -rotate-[18deg] sm:ml-[15px] sm:block"
+              unoptimized
+            />
+            <div className="mt-[10px]">
+              <AddTileDropdown />
+            </div>
+          </div>
+          <OrderSummary variant="cart" className="sm:justify-self-end" />
         </div>
       </div>
     </section>

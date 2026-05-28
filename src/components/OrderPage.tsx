@@ -1,7 +1,6 @@
 "use client";
 
 import { CartSection } from "@/components/cart/CartSection";
-import { OrderSummary } from "@/components/cart/OrderSummary";
 import { CheckoutSection } from "@/components/checkout/CheckoutSection";
 import { DesignTool } from "@/components/design/DesignTool";
 import { Footer } from "@/components/layout/Footer";
@@ -21,7 +20,6 @@ export function OrderPage() {
             <div className="flex flex-wrap items-start gap-8 lg:gap-5 xl:gap-6">
               <div className="w-fit max-w-full flex-none space-y-5">
                 <CartSection />
-                <OrderSummary variant="cart" />
               </div>
 
               <div className="min-w-0 flex-[45_1_30rem]">

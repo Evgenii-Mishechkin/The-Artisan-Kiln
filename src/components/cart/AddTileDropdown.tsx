@@ -30,19 +30,29 @@ export function AddTileDropdown() {
   };
 
   return (
-    <div ref={rootRef} className="relative w-full">
+    <div ref={rootRef} className="relative w-fit">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`flex w-full items-center justify-center gap-2 ${cartRadius} border-2 border-dashed border-kiln-ink/40 bg-kiln-paper px-4 py-3 text-sm font-semibold uppercase tracking-wide text-kiln-navy transition hover:border-kiln-terracotta hover:bg-kiln-cream`}
+        className={`flex w-fit items-center justify-start gap-1.5 ${cartRadius} border-2 border-solid border-kiln-ink bg-kiln-cream px-[7px] py-[3px] text-left text-base font-bold uppercase tracking-wide text-kiln-navy transition hover:opacity-90`}
       >
-        <Image src="/assets/icons/add.svg" alt="" width={20} height={20} />
-        Add New Tile to Cart
+        <Image src="/assets/icons/add.svg" alt="" width={16} height={16} />
+        <Image
+          src="/assets/decor/geo-tile-terra.svg"
+          alt=""
+          width={14}
+          height={14}
+          className={`${cartRadius} border border-kiln-ink/40`}
+          unoptimized
+        />
+        <span className="max-w-[8.5rem] whitespace-normal leading-none">
+          Add New Tile to Cart
+        </span>
         <Image
           src="/assets/icons/chevron-down.svg"
           alt=""
-          width={16}
-          height={16}
+          width={14}
+          height={14}
           className={`transition ${open ? "rotate-180" : ""}`}
         />
       </button>
