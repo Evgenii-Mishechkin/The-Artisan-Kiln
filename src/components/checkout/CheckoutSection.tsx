@@ -17,7 +17,6 @@ const emptyCustomer: CustomerForm = {
   phone: "",
   email: "",
   address: "",
-  projectName: "",
   notes: "",
 };
 
@@ -26,6 +25,47 @@ const emptyCard: CardForm = {
   expiry: "",
   cvv: "",
 };
+
+const fieldLabelClass =
+  "shrink-0 text-sm font-bold uppercase leading-none tracking-wide text-kiln-ink";
+
+function fieldInputClass(field: string, hasError: boolean) {
+  return `min-w-0 flex-1 border-0 border-b-2 bg-transparent p-0 text-base leading-none text-kiln-ink outline-none focus:border-kiln-ink ${
+    hasError ? "border-red-500" : "border-kiln-ink"
+  }`;
+}
+
+function FormRow({
+  label,
+  field,
+  error,
+  compact = false,
+  className = "",
+  children,
+}: {
+  label: string;
+  field: string;
+  error?: string;
+  compact?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={`min-w-0 ${className}`}>
+      <div
+        className={`flex items-end ${compact ? "gap-1.5" : "gap-2"}`}
+      >
+        <span className={fieldLabelClass}>{label}:</span>
+        {children}
+      </div>
+      {error && (
+        <p className="mt-1 text-xs text-red-600" id={`${field}-error`}>
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export function CheckoutSection() {
   const lines = useAppSelector(selectCartLines);
@@ -58,109 +98,78 @@ export function CheckoutSection() {
     setModalOpen(true);
   };
 
-  const inputClass = (field: string) =>
-    `w-full border-b-2 border-kiln-navy/35 bg-transparent py-2 text-sm text-kiln-navy outline-none transition focus:border-kiln-terracotta ${errors[field] ? "border-red-500" : ""}`;
+  const inputProps = (field: keyof CustomerForm) => ({
+    className: fieldInputClass(field, Boolean(errors[field])),
+    value: customer[field],
+    onChange: (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => setField(field)(e.target.value),
+    "aria-invalid": errors[field] ? true : undefined,
+    "aria-describedby": errors[field] ? `${field}-error` : undefined,
+  });
 
   return (
     <>
-      <form onSubmit={onSubmit} className="flex flex-col gap-6">
+      <form onSubmit={onSubmit} className="flex flex-col gap-2">
         <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-kiln-navy">
-            Customer Information
-          </h2>
-          <div className="space-y-4">
-            <label className="block">
-              <span className="text-[10px] font-bold uppercase text-kiln-navy/70">
-                Customer Name
-              </span>
-              <input
-                className={inputClass("name")}
-                value={customer.name}
-                onChange={(e) => setField("name")(e.target.value)}
-              />
-              {errors.name && (
-                <span className="text-xs text-red-600">{errors.name}</span>
-              )}
-            </label>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block">
-                <span className="text-[10px] font-bold uppercase text-kiln-navy/70">
-                  Phone
-                </span>
-                <input
-                  className={inputClass("phone")}
-                  value={customer.phone}
-                  onChange={(e) => setField("phone")(e.target.value)}
-                />
-                {errors.phone && (
-                  <span className="text-xs text-red-600">{errors.phone}</span>
-                )}
-              </label>
-              <label className="block">
-                <span className="text-[10px] font-bold uppercase text-kiln-navy/70">
-                  Email
-                </span>
-                <input
-                  type="email"
-                  className={inputClass("email")}
-                  value={customer.email}
-                  onChange={(e) => setField("email")(e.target.value)}
-                />
-                {errors.email && (
-                  <span className="text-xs text-red-600">{errors.email}</span>
-                )}
-              </label>
+          <div className="mb-4 flex w-full items-stretch bg-kiln-cream">
+            <div className="flex w-fit items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] border-[2px] border-b-0 border-kiln-ink bg-kiln-cream px-3 py-[6px]">
+              <h2 className="text-[2rem] font-black uppercase leading-none text-kiln-ink">
+                Order Summary
+              </h2>
             </div>
-            <label className="block">
-              <span className="text-[10px] font-bold uppercase text-kiln-navy/70">
-                Shipping Address
-              </span>
-              <input
-                className={inputClass("address")}
-                value={customer.address}
-                onChange={(e) => setField("address")(e.target.value)}
-              />
-              {errors.address && (
-                <span className="text-xs text-red-600">{errors.address}</span>
-              )}
-            </label>
+            <div
+              className="flex-1 self-stretch border-b-[2px] border-kiln-ink bg-kiln-cream"
+              aria-hidden
+            />
           </div>
-        </div>
 
-        <div>
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-kiln-navy">
-            Project Name / Notes
-          </h2>
-          <div className="space-y-4">
-            <label className="block">
-              <span className="text-[10px] font-bold uppercase text-kiln-navy/70">
-                Project Name
-              </span>
-              <input
-                className={inputClass("projectName")}
-                value={customer.projectName}
-                onChange={(e) => setField("projectName")(e.target.value)}
-                placeholder="e.g. Kitchen backsplash"
-              />
-            </label>
-            <label className="block">
-              <span className="text-[10px] font-bold uppercase text-kiln-navy/70">
-                Notes
-              </span>
+          <div className="min-w-0 space-y-[5px] border-b-2 border-kiln-ink pb-[25px]">
+            <FormRow label="Customer Name" field="name" error={errors.name}>
+              <input type="text" {...inputProps("name")} />
+            </FormRow>
+
+            <div className="grid min-w-0 grid-cols-2 gap-x-2">
+              <FormRow
+                label="Phone"
+                field="phone"
+                error={errors.phone}
+                compact
+              >
+                <input type="tel" {...inputProps("phone")} />
+              </FormRow>
+              <FormRow
+                label="Email"
+                field="email"
+                error={errors.email}
+                compact
+              >
+                <input type="email" {...inputProps("email")} />
+              </FormRow>
+            </div>
+
+            <FormRow
+              label="Shipping Address"
+              field="address"
+              error={errors.address}
+            >
+              <input type="text" {...inputProps("address")} />
+            </FormRow>
+
+            <FormRow label="Project Notes" field="notes" error={errors.notes}>
               <textarea
-                rows={3}
-                className="mt-1 w-full resize-y rounded border border-kiln-navy/20 bg-kiln-paper/50 p-2 text-sm text-kiln-navy"
-                value={customer.notes}
-                onChange={(e) => setField("notes")(e.target.value)}
-                placeholder="Installation details, preferences…"
+                rows={1}
+                {...inputProps("notes")}
+                className={`${fieldInputClass("notes", Boolean(errors.notes))} resize-y overflow-hidden`}
               />
-            </label>
+            </FormRow>
           </div>
         </div>
 
-        <div className="hidden lg:block">
-          <OrderSummary variant="checkout" />
-        </div>
+        <OrderSummary
+          plainCells
+          className="hidden w-fit self-end lg:block"
+        />
 
         <PaymentMethods
           method={paymentMethod}
@@ -172,7 +181,7 @@ export function CheckoutSection() {
 
         <button
           type="submit"
-          className="w-full rounded-sm bg-kiln-navy px-6 py-4 text-sm font-bold uppercase tracking-wider text-kiln-cream shadow-artisan transition hover:bg-kiln-navy-light"
+          className="w-full rounded-[5px] border-2 border-kiln-ink bg-kiln-slate px-4 py-2 text-lg font-bold uppercase leading-none tracking-wide text-white transition hover:opacity-90"
         >
           Place Secure Order — {formatCurrency(grandTotal)}
         </button>

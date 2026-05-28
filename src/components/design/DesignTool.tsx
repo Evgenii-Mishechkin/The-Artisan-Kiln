@@ -110,7 +110,7 @@ function GridCell({ index, tileId }: { index: number; tileId: TileId | null }) {
             <TilePattern
               tileId={tileId}
               size={64}
-              className="!h-full !w-full !max-h-none !max-w-none"
+              className="h-full w-full max-h-none max-w-none"
             />
           </div>
           <button

@@ -3,7 +3,6 @@
 import { HeaderActions } from "@/components/layout/HeaderActions";
 import { pageContainerClass } from "@/components/layout/PageFrame";
 
-const NAV_MOBILE = ["Shop", "Collections", "About Us"];
 const NAV_DESKTOP = [
   "Home",
   "Shop",
@@ -24,6 +23,16 @@ function WindowDots() {
   );
 }
 
+function BurgerIcon() {
+  return (
+    <span className="flex flex-col gap-[4px]" aria-hidden>
+      <span className="block h-[2px] w-6 rounded-full bg-kiln-ink" />
+      <span className="block h-[2px] w-6 rounded-full bg-kiln-ink" />
+      <span className="block h-[2px] w-6 rounded-full bg-kiln-ink" />
+    </span>
+  );
+}
+
 const navLinkClass =
   "text-base font-black uppercase leading-none tracking-[0.1em] text-kiln-ink hover:text-kiln-terracotta";
 
@@ -40,16 +49,16 @@ export function Header() {
             className="pointer-events-none absolute inset-0 flex items-center justify-center"
             aria-label="Main"
           >
-            <ul className="pointer-events-auto flex h-full items-center gap-x-5">
-              {NAV_MOBILE.map((item) => (
-                <li key={item} className="flex h-full items-center lg:hidden">
-                  <a href="#" className={navLinkClass}>
-                    {item}
-                  </a>
-                </li>
-              ))}
+            <button
+              type="button"
+              className="pointer-events-auto flex h-full items-center text-kiln-ink lg:hidden"
+              aria-label="Open menu"
+            >
+              <BurgerIcon />
+            </button>
+            <ul className="pointer-events-auto hidden h-full items-center gap-x-5 lg:flex">
               {NAV_DESKTOP.map((item) => (
-                <li key={item} className="hidden h-full items-center lg:flex">
+                <li key={item} className="flex h-full items-center">
                   <a href="#" className={navLinkClass}>
                     {item}
                   </a>

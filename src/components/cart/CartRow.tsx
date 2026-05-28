@@ -46,7 +46,11 @@ export function CartRow({ line }: CartRowProps) {
       </td>
       <td className={`${cartBodyCell} ${cartColItem}`}>
         <div className="flex h-full items-center justify-center">
-          <TilePattern tileId={line.tileId} size={56} />
+          <TilePattern
+            tileId={line.tileId}
+            size={56}
+            className="h-auto w-full max-w-[3.5rem]"
+          />
         </div>
       </td>
       <td className={`${cartBodyCell} ${cartColValue}`}>

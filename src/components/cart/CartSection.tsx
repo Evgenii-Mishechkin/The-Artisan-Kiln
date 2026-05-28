@@ -29,15 +29,15 @@ export function CartSection() {
   const lines = useAppSelector(selectCartLines);
 
   return (
-    <section className="w-fit max-w-full">
+    <section className="w-full max-w-full sm:w-fit">
       <div className="overflow-hidden rounded-t-[5px] border-2 border-kiln-ink bg-kiln-paper shadow-inner-bracket">
-        <table className="w-[22.1rem] table-fixed border-collapse sm:w-[32.6rem]">
+        <table className="w-full table-fixed border-collapse sm:w-[32.6rem]">
           <colgroup>
-            <col className="w-[5.9rem]" />
-            <col className="w-[4.3rem]" />
-            <col className="w-[4.3rem]" />
-            <col className="w-[4.3rem]" />
-            <col className="w-[4.3rem]" />
+            <col className="w-[25.5%] sm:w-[5.9rem]" />
+            <col className="w-[18.6%] sm:w-[4.3rem]" />
+            <col className="w-[18.6%] sm:w-[4.3rem]" />
+            <col className="w-[18.6%] sm:w-[4.3rem]" />
+            <col className="w-[18.6%] sm:w-[4.3rem]" />
           </colgroup>
           <thead>
             <tr>
@@ -76,18 +76,18 @@ export function CartSection() {
       </div>
 
       <div className="grid grid-flow-col justify-items-end sm:grid-cols-[auto_1fr] sm:items-start">
-        <div className="pl-8 pt-4">
+        <div className="pl-0 pt-2 sm:pl-8 sm:pt-4">
           <Image
             src="/assets/decor/geo-tile-terra.svg"
             alt=""
             width={64}
             height={64}
-            className="h-16 w-16 -rotate-[18deg] rounded-[5px]"
+            className="h-10 w-10 -rotate-[18deg] rounded-[5px] sm:h-16 sm:w-16"
             unoptimized
           />
         </div>
         <AddTileDropdown />
-        <OrderSummary variant="cart" className="sm:justify-self-end" />
+        <OrderSummary className="sm:justify-self-end" />
       </div>
     </section>
   );

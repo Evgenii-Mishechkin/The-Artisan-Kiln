@@ -28,7 +28,6 @@ export interface CustomerForm {
   phone: string;
   email: string;
   address: string;
-  projectName: string;
   notes: string;
 }
 

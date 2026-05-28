@@ -63,12 +63,6 @@ export function OrderSuccessModal({
               </p>
               <p>{customer.email}</p>
               <p>{customer.address}</p>
-              {customer.projectName && (
-                <p>
-                  <span className="text-kiln-navy/60">Project: </span>
-                  {customer.projectName}
-                </p>
-              )}
               {customer.notes && (
                 <p className="text-kiln-navy/80">{customer.notes}</p>
               )}
