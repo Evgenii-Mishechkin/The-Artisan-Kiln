@@ -30,9 +30,6 @@ export function CartSection() {
 
   return (
     <section className="w-fit max-w-full flex flex-col gap-4">
-      <h2 className="inline-block self-start text-[2.2rem] font-black uppercase leading-none tracking-tight text-kiln-ink">
-        Shopping Cart & Design Tool
-      </h2>
       <div className="w-fit max-w-full">
         <div className="overflow-hidden rounded-t-[5px] border-2 border-kiln-ink bg-kiln-paper shadow-inner-bracket">
           <table className="w-[22.1rem] table-fixed border-collapse sm:w-[32.6rem]">

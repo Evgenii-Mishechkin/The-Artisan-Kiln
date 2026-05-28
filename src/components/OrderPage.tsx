@@ -17,16 +17,19 @@ export function OrderPage() {
 
         <div className="mt-8 flex flex-col gap-8 lg:mt-10 lg:flex-row lg:items-start lg:gap-5 xl:gap-6">
           <div className="min-w-0 lg:flex-[75_1_0%]">
+            <h2 className="inline-block self-start mb-2 text-[2.2rem] font-black uppercase leading-none text-kiln-ink">
+              Shopping Cart & Design Tool
+            </h2>
+
             <div className="flex flex-wrap items-start gap-8 lg:gap-5 xl:gap-6">
               <CartSection />
-
               <div className="min-w-0 flex-[45_1_30rem]">
                 <DesignTool />
               </div>
             </div>
           </div>
 
-          <div className="min-w-0 lg:flex-[25_0_0%]">
+          <div className="min-w-0 lg:flex-[20_0_0%]">
             <CheckoutSection />
           </div>
         </div>

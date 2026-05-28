@@ -34,13 +34,14 @@ function PaletteTile({ tileId }: { tileId: TileId }) {
       type="button"
       {...listeners}
       {...attributes}
-      className={`flex flex-col items-center gap-1 rounded border border-kiln-navy/20 bg-kiln-paper p-2 transition ${isDragging ? "opacity-40" : "hover:border-kiln-terracotta"}`}
+      className={`aspect-square w-full overflow-hidden rounded border border-kiln-navy/20 bg-kiln-paper transition ${isDragging ? "opacity-40" : "hover:border-kiln-terracotta"}`}
       aria-label={`Drag ${tile.name} to grid`}
     >
-      <TilePattern tileId={tileId} size={48} />
-      <span className="text-[10px] font-medium uppercase text-kiln-navy">
-        {tile.name}
-      </span>
+      <TilePattern
+        tileId={tileId}
+        size={48}
+        className="!h-full !w-full !max-h-none !max-w-none rounded-none border-0 object-cover"
+      />
     </button>
   );
 }
@@ -178,15 +179,6 @@ export function DesignTool() {
 
   return (
     <section className="hidden flex-col gap-4 lg:flex">
-      <div className="text-center">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-kiln-navy">
-          Visualize Your Order
-        </h2>
-        <p className="mt-1 text-[10px] uppercase tracking-wide text-kiln-navy/50">
-          Drag tiles from the palette onto the board
-        </p>
-      </div>
-
       {paletteIds.length === 0 ? (
         <p className="rounded border border-dashed border-kiln-navy/30 p-6 text-center text-sm text-kiln-navy/50">
           Add tiles to your cart to unlock the design palette.
@@ -197,8 +189,16 @@ export function DesignTool() {
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
         >
-          <div className="flex gap-4">
+          <div className="flex items-start">
             <div className="flex flex-1 flex-col">
+              <div className="text-center pb-10 pt-4 border-[2px] border-b-0 border-kiln-ink bg-kiln-cream">
+                <h2 className="text-[1.2rem] font-bold uppercase tracking-widest text-kiln-navy">
+                  Visualize Your Order
+                </h2>
+                <p className="text-[1rem] font-bold text-kiln-navy">
+                  Drag tiles from the palette onto the board
+                </p>
+              </div>
               <div
                 className="grid gap-0 border-2 border-solid border-kiln-ink"
                 style={{
@@ -212,13 +212,15 @@ export function DesignTool() {
               <TrashZone />
             </div>
 
-            <aside className="flex max-h-[420px] w-24 flex-col gap-2 overflow-y-auto">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-kiln-navy/60">
+            <aside className="w-[9.5rem] shrink-0">
+              <p className="bg-kiln-cream pb-2 text-center text-[1.5rem] font-bold uppercase text-kiln-navy border-[2px] border-l-0 border-kiln-ink">
                 Design Palette
               </p>
-              {paletteIds.map((id) => (
-                <PaletteTile key={id} tileId={id} />
-              ))}
+              <div className="grid grid-cols-2 gap-2 border-[2px] border-t-0 border-l-0 border-kiln-ink bg-kiln-cream p-2 max-h-[420px] overflow-y-auto">
+                {paletteIds.map((id) => (
+                  <PaletteTile key={id} tileId={id} />
+                ))}
+              </div>
             </aside>
           </div>
 
