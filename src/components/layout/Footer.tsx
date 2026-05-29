@@ -7,11 +7,11 @@ const FOOTER_LINKS = [
   "Contact Us",
 ] as const;
 
-export function Footer() {
+export function Footer({ className = "" }: { className?: string }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-12 pb-8 pt-8 text-center">
+    <footer className={`pb-8 pt-8 text-center ${className}`.trim()}>
       <nav
         className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm font-bold uppercase leading-tight tracking-wide text-kiln-ink"
         aria-label="Footer"

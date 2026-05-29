@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Pathway_Gothic_One } from "next/font/google";
+import { InitialLoader } from "@/components/layout/InitialLoader";
 import { StoreProvider } from "@/components/providers/StoreProvider";
 import "./globals.css";
 
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pathwayGothic.variable} font-sans`}>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <InitialLoader>{children}</InitialLoader>
+        </StoreProvider>
       </body>
     </html>
   );

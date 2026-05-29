@@ -10,7 +10,6 @@ import { useAppSelector } from "@/store/hooks";
 
 interface OrderSummaryProps {
   className?: string;
-  /** Без рамок и фона у значений (checkout под формой) */
   plainCells?: boolean;
 }
 

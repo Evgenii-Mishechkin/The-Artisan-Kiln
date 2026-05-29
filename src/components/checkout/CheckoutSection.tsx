@@ -29,7 +29,7 @@ const emptyCard: CardForm = {
 const fieldLabelClass =
   "shrink-0 text-sm font-bold uppercase leading-none tracking-wide text-kiln-ink";
 
-function fieldInputClass(field: string, hasError: boolean) {
+function fieldInputClass(hasError: boolean) {
   return `min-w-0 flex-1 border-0 border-b-2 bg-transparent p-0 text-base leading-none text-kiln-ink outline-none focus:border-kiln-ink ${
     hasError ? "border-red-500" : "border-kiln-ink"
   }`;
@@ -99,7 +99,7 @@ export function CheckoutSection() {
   };
 
   const inputProps = (field: keyof CustomerForm) => ({
-    className: fieldInputClass(field, Boolean(errors[field])),
+    className: fieldInputClass(Boolean(errors[field])),
     value: customer[field],
     onChange: (
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -114,7 +114,7 @@ export function CheckoutSection() {
         <div>
           <div className="mb-4 flex w-full items-stretch bg-kiln-cream">
             <div className="flex w-fit items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] border-[2px] border-b-0 border-kiln-ink bg-kiln-cream px-3 py-[6px]">
-              <h2 className="text-[2rem] font-black uppercase leading-none text-kiln-ink">
+              <h2 className="text-[1.5rem] font-black uppercase leading-none text-kiln-ink lg:text-[2rem]">
                 Order Summary
               </h2>
             </div>
@@ -160,7 +160,7 @@ export function CheckoutSection() {
               <textarea
                 rows={1}
                 {...inputProps("notes")}
-                className={`${fieldInputClass("notes", Boolean(errors.notes))} resize-y overflow-hidden`}
+                className={`${fieldInputClass(Boolean(errors.notes))} resize-y overflow-hidden`}
               />
             </FormRow>
           </div>

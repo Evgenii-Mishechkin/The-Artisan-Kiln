@@ -1,0 +1,33 @@
+Copyright (c) 2025 The Artisan Kiln Order Form contributors
+
+All rights reserved.
+
+Permission is granted for personal, non-commercial use, including to view,
+fork, run locally, study, learn from, and modify the code for your own private
+needs, as well as for educational purposes and non-commercial portfolio or
+job-application review. You may deploy a copy for yourself only if it is not
+used to earn money or support a business.
+
+You must not use, copy, modify, merge, publish, distribute, sublicense,
+or sell this software, its source code, design assets, or derivative works
+for any commercial purpose, including but not limited to:
+
+- selling or licensing the software or any part of it;
+- offering it as part of a paid product or service;
+- using it in client work, agency deliverables, or production systems for
+  a business;
+- monetizing deployments, hosting, or access to the application.
+
+Any commercial use requires prior written permission from the copyright
+holder.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+Third-party dependencies are licensed under their own terms (see
+package.json and node_modules).

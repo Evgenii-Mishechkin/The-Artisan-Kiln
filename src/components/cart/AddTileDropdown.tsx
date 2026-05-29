@@ -34,18 +34,18 @@ export function AddTileDropdown() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`flex w-fit items-center justify-start gap-1.5 ${cartRadius} border-2 border-solid border-kiln-ink bg-kiln-cream px-[7px] py-[3px] text-left text-base font-bold uppercase tracking-wide text-kiln-navy transition hover:opacity-90`}
+        className={`flex w-fit items-center justify-start gap-1.5 ${cartRadius} border-2 border-solid border-kiln-ink bg-kiln-cream px-[7px] text-left text-xs font-bold uppercase leading-tight tracking-wide text-kiln-navy transition hover:opacity-90 sm:text-base sm:leading-none`}
       >
         <Image src="/assets/icons/add.svg" alt="" width={16} height={16} />
         <Image
           src="/assets/decor/geo-tile-terra.svg"
           alt=""
-          width={14}
-          height={14}
-          className={`${cartRadius} border border-kiln-ink/40`}
+          width={20}
+          height={20}
+          className={`h-5 w-5 shrink-0 ${cartRadius} border border-kiln-ink/40`}
           unoptimized
         />
-        <span className="max-w-[8.5rem] whitespace-normal leading-none">
+        <span className="max-w-[8.5rem] whitespace-normal">
           Add New Tile <br />
           to Cart
         </span>

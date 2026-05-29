@@ -11,8 +11,8 @@ import {
   type DragEndEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { TILE_BY_ID } from "@/constants/tiles";
 import { clearCell, placeTile } from "@/store/slices/designGridSlice";
 import { selectDesignCells, selectPaletteTileIds } from "@/store/selectors";
@@ -91,7 +91,7 @@ function GridCell({ index, tileId }: { index: number; tileId: TileId | null }) {
   return (
     <div
       ref={setDropRef}
-      className={`relative aspect-square border-b-2 border-r-2 border-solid border-kiln-ink bg-kiln-cream/50 transition [&:nth-child(6n)]:border-r-0 [&:nth-last-child(-n+6)]:border-b-0 ${isOver ? "ring-2 ring-inset ring-kiln-terracotta" : ""}`}
+      className={`relative aspect-square min-w-0 border-l-2 border-t-2 border-solid border-kiln-ink bg-kiln-cream/50 transition ${isOver ? "ring-2 ring-inset ring-kiln-terracotta" : ""}`}
     >
       {tileId && (
         <motion.div
@@ -132,7 +132,18 @@ export function DesignTool() {
   const dispatch = useAppDispatch();
   const cells = useAppSelector(selectDesignCells);
   const paletteIds = useAppSelector(selectPaletteTileIds);
+  const hasPalette = paletteIds.length > 0;
+  const [showBoard, setShowBoard] = useState(hasPalette);
+  const [showLocked, setShowLocked] = useState(!hasPalette);
   const [activeTileId, setActiveTileId] = useState<TileId | null>(null);
+
+  useEffect(() => {
+    if (hasPalette && showLocked) {
+      setShowLocked(false);
+    } else if (!hasPalette && showBoard) {
+      setShowBoard(false);
+    }
+  }, [hasPalette, showBoard, showLocked]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -177,64 +188,93 @@ export function DesignTool() {
     setActiveTileId(null);
   };
 
+  const boardMotion = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -6 },
+    transition: { duration: 0.28, ease: "easeInOut" as const },
+  };
+
   return (
     <section className="hidden lg:block">
-      {paletteIds.length === 0 ? (
-        <p className="rounded border border-dashed border-kiln-navy/30 p-6 text-center text-sm text-kiln-navy/50">
-          Add tiles to your cart to unlock the design palette.
-        </p>
-      ) : (
-        <DndContext
-          sensors={sensors}
-          onDragStart={onDragStart}
-          onDragEnd={onDragEnd}
-        >
-          <div className="flex items-start">
-            <div className="flex flex-1 flex-col">
-              <div className="rounded-tl-[5px] border-[2px] border-b-0 border-kiln-ink bg-kiln-cream pb-10 pt-4 text-center">
-                <h2 className="text-[1.2rem] font-bold uppercase tracking-widest text-kiln-navy">
-                  Visualize Your Order
-                </h2>
-                <p className="text-[1rem] font-bold text-kiln-navy">
-                  Drag tiles from the palette onto the board
-                </p>
-              </div>
-              <div
-                className="grid gap-0 overflow-hidden rounded-bl-[5px] rounded-br-[5px] border-2 border-solid border-kiln-ink"
-                style={{
-                  gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`,
-                }}
-              >
-                {cells.map((cellTileId, index) => (
-                  <GridCell key={index} index={index} tileId={cellTileId} />
-                ))}
-              </div>
-              <TrashZone />
-            </div>
+      <AnimatePresence
+        initial={false}
+        onExitComplete={() => {
+          if (hasPalette) {
+            setShowBoard(true);
+          } else {
+            setShowLocked(true);
+          }
+        }}
+      >
+        {showBoard && hasPalette && (
+          <motion.div key="design-board" className="min-w-0" {...boardMotion}>
+            <DndContext
+              sensors={sensors}
+              onDragStart={onDragStart}
+              onDragEnd={onDragEnd}
+            >
+              <div className="flex items-start">
+                <div className="flex flex-1 flex-col">
+                  <div className="rounded-tl-[5px] border-[2px] border-b-0 border-kiln-ink bg-kiln-cream pb-10 pt-4 text-center">
+                    <h2 className="text-[1.2rem] font-bold uppercase tracking-widest text-kiln-navy">
+                      Visualize Your Order
+                    </h2>
+                    <p className="text-[1rem] font-bold text-kiln-navy">
+                      Drag tiles from the palette onto the board
+                    </p>
+                  </div>
+                  <div
+                    className="grid gap-0 overflow-hidden rounded-bl-[5px] rounded-br-[5px] border-b-2 border-r-2 border-solid border-kiln-ink"
+                    style={{
+                      gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {cells.map((cellTileId, index) => (
+                      <GridCell key={index} index={index} tileId={cellTileId} />
+                    ))}
+                  </div>
+                  <TrashZone />
+                </div>
 
-            <aside className="w-[9.5rem] shrink-0">
-              <p className="rounded-tr-[5px] border-[2px] border-l-0 border-kiln-ink bg-kiln-cream pb-2 text-center text-[1.5rem] font-bold uppercase text-kiln-navy">
-                Design Palette
-              </p>
-              <div className="grid max-h-[420px] grid-cols-2 gap-2 overflow-y-auto rounded-br-[5px] border-[2px] border-t-0 border-l-0 border-kiln-ink bg-kiln-cream p-2">
-                {paletteIds.map((id) => (
-                  <PaletteTile key={id} tileId={id} />
-                ))}
+                <aside className="w-[9.5rem] shrink-0">
+                  <p className="rounded-tr-[5px] border-[2px] border-l-0 border-kiln-ink bg-kiln-cream pb-2 text-center text-[1.5rem] font-bold uppercase text-kiln-navy">
+                    Design Palette
+                  </p>
+                  <div className="grid max-h-[420px] grid-cols-2 gap-2 overflow-y-auto rounded-br-[5px] border-[2px] border-t-0 border-l-0 border-kiln-ink bg-kiln-cream p-2">
+                    {paletteIds.map((id) => (
+                      <PaletteTile key={id} tileId={id} />
+                    ))}
+                  </div>
+                </aside>
               </div>
-            </aside>
-          </div>
 
-          <DragOverlay dropAnimation={null}>
-            {activeTileId ? (
-              <TilePattern
-                tileId={activeTileId}
-                size={64}
-                className="cursor-grabbing shadow-lg ring-2 ring-kiln-terracotta/40"
-              />
-            ) : null}
-          </DragOverlay>
-        </DndContext>
-      )}
+              <DragOverlay dropAnimation={null}>
+                {activeTileId ? (
+                  <TilePattern
+                    tileId={activeTileId}
+                    size={64}
+                    className="cursor-grabbing shadow-lg ring-2 ring-kiln-terracotta/40"
+                  />
+                ) : null}
+              </DragOverlay>
+            </DndContext>
+          </motion.div>
+        )}
+
+        {showLocked && (
+          <motion.p
+            key="design-locked"
+            className="rounded border border-dashed border-kiln-navy/30 p-6 text-center text-sm text-kiln-navy/50"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.28, ease: "easeInOut" }}
+          >
+            Add tiles to your cart to unlock the design palette.
+          </motion.p>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

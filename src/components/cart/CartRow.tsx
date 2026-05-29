@@ -30,10 +30,10 @@ export function CartRow({ line }: CartRowProps) {
 
   return (
     <motion.tr
-      layout
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       className="bg-kiln-paper last:[&>td]:border-b-0"
     >
       <td className={`${cartBodyCell} ${cartColTight} border-l-0`}>

@@ -22,7 +22,7 @@ const PRIMARY_METHODS: {
 ];
 
 const CARD_BRAND_BOX_CLASS = "h-7 w-12 px-1.5 py-0.5";
-const CARD_BRAND_IMG_CLASS = "h-4 w-full max-h-4 object-contain";
+const CARD_BRAND_IMG_CLASS = "h-6 w-full max-h-6";
 
 const CARD_BRANDS = [
   { src: "/assets/icons/payment-visa.svg", alt: "Visa" },
@@ -41,17 +41,17 @@ const GRID_METHODS: {
     id: "apple_pay",
     label: "Apple Pay",
     icon: "/assets/icons/payment-apple.svg",
-    iconWidth: 56,
-    iconHeight: 24,
-    imgClass: "h-5 w-auto max-w-[72px]",
+    iconWidth: 72,
+    iconHeight: 32,
+    imgClass: "h-8 w-auto max-w-[88px]",
   },
   {
     id: "bank_transfer",
     label: "Bank Transfer",
     icon: "/assets/icons/payment-bank.svg",
-    iconWidth: 36,
-    iconHeight: 36,
-    imgClass: "h-7 w-7",
+    iconWidth: 44,
+    iconHeight: 44,
+    imgClass: "h-9 w-9",
   },
 ];
 
@@ -72,9 +72,9 @@ const optionLabelClass =
 const fieldLabelClass =
   "mb-1 block text-[10px] font-bold uppercase leading-none text-kiln-ink";
 
-function paymentInputClass(field: string, errors: Record<string, string>) {
+function paymentInputClass(hasError: boolean) {
   return `w-full rounded-[5px] border border-kiln-ink bg-kiln-page px-2 py-1 text-sm leading-tight text-kiln-ink outline-none placeholder:font-bold placeholder:uppercase placeholder:text-kiln-ink/35 ${
-    errors[field] ? "border-red-500" : ""
+    hasError ? "border-red-500" : ""
   }`;
 }
 
@@ -177,8 +177,8 @@ export function PaymentMethods({
                   key={brand.alt}
                   src={brand.src}
                   alt={brand.alt}
-                  width={48}
-                  height={32}
+                  width={64}
+                  height={40}
                   boxClassName={CARD_BRAND_BOX_CLASS}
                   imgClass={CARD_BRAND_IMG_CLASS}
                 />
@@ -189,7 +189,7 @@ export function PaymentMethods({
           <label className="block">
             <span className={fieldLabelClass}>Card Number</span>
             <input
-              className={paymentInputClass("number", errors)}
+              className={paymentInputClass(Boolean(errors.number))}
               placeholder="1234 4556 7723 8990"
               value={card.number}
               onChange={(e) =>
@@ -206,7 +206,7 @@ export function PaymentMethods({
           <div className="grid grid-cols-2 gap-2">
             <label className="block min-w-0">
               <input
-                className={paymentInputClass("expiry", errors)}
+                className={paymentInputClass(Boolean(errors.expiry))}
                 placeholder="Expiration /"
                 aria-label="Expiration"
                 value={card.expiry}
@@ -224,7 +224,7 @@ export function PaymentMethods({
             </label>
             <label className="block min-w-0">
               <input
-                className={paymentInputClass("cvv", errors)}
+                className={paymentInputClass(Boolean(errors.cvv))}
                 placeholder="CVV"
                 value={card.cvv}
                 maxLength={4}

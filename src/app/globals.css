@@ -3,12 +3,24 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --kiln-bg: #f7f6e3;
-    --kiln-text: #080501;
+  html,
+  body {
+    @apply min-h-dvh bg-kiln-page;
   }
 
   body {
-    @apply bg-kiln-page font-sans text-kiln-ink antialiased;
+    @apply font-sans text-kiln-ink antialiased;
+  }
+}
+
+@layer utilities {
+  @keyframes kiln-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-kiln-spin {
+    animation: kiln-spin 2.75s linear infinite;
   }
 }

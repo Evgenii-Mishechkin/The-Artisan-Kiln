@@ -1,14 +1,15 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { selectCartLines } from "@/store/selectors";
 import { useAppSelector } from "@/store/hooks";
 import { AddTileDropdown } from "@/components/cart/AddTileDropdown";
 import { OrderSummary } from "@/components/cart/OrderSummary";
 import { CartRow } from "@/components/cart/CartRow";
 import {
-  cartCell,
+  cartBodyCell,
   cartColTight,
   cartColValue,
   cartHead,
@@ -27,6 +28,14 @@ function HeadTwoLine({ top, bottom }: { top: string; bottom: string }) {
 
 export function CartSection() {
   const lines = useAppSelector(selectCartLines);
+  const [showEmpty, setShowEmpty] = useState(lines.length === 0);
+  const [showRows, setShowRows] = useState(lines.length > 0);
+
+  useEffect(() => {
+    if (lines.length > 0 && showEmpty) {
+      setShowEmpty(false);
+    }
+  }, [lines.length, showEmpty]);
 
   return (
     <section className="w-full max-w-full sm:w-fit">
@@ -57,18 +66,34 @@ export function CartSection() {
             </tr>
           </thead>
           <tbody className="[&>tr:last-child>td]:border-b-0">
-            <AnimatePresence initial={false}>
-              {lines.length === 0 ? (
-                <tr>
+            <AnimatePresence
+              initial={false}
+              onExitComplete={() => {
+                if (lines.length === 0) {
+                  setShowEmpty(true);
+                  setShowRows(false);
+                } else {
+                  setShowRows(true);
+                }
+              }}
+            >
+              {showRows &&
+                lines.map((line) => <CartRow key={line.id} line={line} />)}
+              {showEmpty && (
+                <motion.tr
+                  key="cart-empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <td
                     colSpan={5}
-                    className={`${cartCell} border-b-0 border-l-0 border-r-0 py-8 text-sm text-kiln-navy/50`}
+                    className={`${cartBodyCell} border-b-0 border-l-0 border-r-0 text-sm text-kiln-navy/50`}
                   >
                     Your cart is empty. Add tiles to get started.
                   </td>
-                </tr>
-              ) : (
-                lines.map((line) => <CartRow key={line.id} line={line} />)
+                </motion.tr>
               )}
             </AnimatePresence>
           </tbody>
@@ -76,13 +101,13 @@ export function CartSection() {
       </div>
 
       <div className="grid grid-flow-col justify-items-end sm:grid-cols-[auto_1fr] sm:items-start">
-        <div className="pl-0 pt-2 sm:pl-8 sm:pt-4">
+        <div className="hidden min-[425px]:flex items-end justify-self-start pt-2 sm:justify-self-auto sm:pl-6 sm:pt-4">
           <Image
-            src="/assets/decor/geo-tile-terra.svg"
+            src="/assets/decor/hand-tile.png"
             alt=""
-            width={64}
-            height={64}
-            className="h-10 w-10 -rotate-[18deg] rounded-[5px] sm:h-16 sm:w-16"
+            width={140}
+            height={140}
+            className="h-14 w-auto max-w-[5.5rem] -translate-x-3 object-contain sm:h-[4.75rem] sm:max-w-[6.5rem] sm:translate-x-[25px]"
             unoptimized
           />
         </div>
